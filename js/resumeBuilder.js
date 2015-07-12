@@ -11,7 +11,7 @@ var work = {
 		{
 			"employer" : "Civil Arch Farm",
 			"title" : "Site Engineer",
-			"location" : "Sylhet",
+			"location" : "United States",
 			"duration" : "2.5 months",
 			"description" : "Real Horrible Experience"
 		},
@@ -20,7 +20,7 @@ var work = {
 		{
 			"employer" : "Odesk Clients",
 			"title" : "Contractor",
-			"location" : "Internet",
+			"location" : "United States",
 			"duration" : "4 Years",
 			"description" : "Steady Income, different buyers, interesting yet tough and stressful life"
 		},
@@ -29,12 +29,30 @@ var work = {
 		{
 			"employer" : "Upwork",
 			"title" : "Web Developer Wannabe",
-			"location" : "Internet",
+			"location" : "United States",
 			"duration" : "Present onward",
 			"description" : "Do or die, make or break situation"
 		}
 	]
 }
+
+var displaywork = function()
+{
+	for(job in work.jobs)
+	{
+		$("#workExperience").append(HTMLworkStart);
+		var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+		var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+		var formattedDates = HTMLworkDates.replace("%data%", work.jobs[job].duration);
+		var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+		$(".work-entry:last").append(formattedDates);
+		$(".work-entry:last").append(formattedTitle);
+		$(".work-entry:last").append(formattedEmployer);
+		$(".work-entry:last").append(formattedDescription);
+	}
+}
+
+displaywork();
 
 var projects = {
 		"project" : [
@@ -54,6 +72,34 @@ var projects = {
 		]
 }
 
+
+projects.display = function()
+	{
+		$("#projects").append(HTMLprojectStart);
+		for (var n in projects.project)
+		{
+			var pTitle = HTMLprojectTitle.replace("%data%", projects.project[n].title);
+			$(".project-entry").append(pTitle);
+
+			var pDue = HTMLworkDates.replace("%data%", projects.project[n].duration);
+			$(".project-entry").append(pDue);
+
+			var pDesc = HTMLworkDescription.replace("%data%", projects.project[n].description);
+			$(".project-entry").append(pDesc);
+
+			var len = projects.project[n].images.length;
+			for (var i=0; i<len; i++)
+			{
+
+				var pImg = HTMLprojectImage.replace("%data%", projects.project[n].images[i]);
+				
+				$(".project-entry:last").append(pImg);
+			}
+			
+		}
+	}
+
+projects.display();
 var bio = {
 	"name" : "Tarik Hasan Khan",
 	"role" : "Web Developer",
@@ -107,3 +153,5 @@ if (bio.skills.length > 0)
 	}
 
 }
+
+$("#mapDiv").append(googleMap);
